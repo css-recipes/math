@@ -1,0 +1,71 @@
+$crp-Math-approximationLimit: 10;
+$crp-Math-approximationDecimalRound: 5;
+
+@function crp-Math-power($x, $exponent) {
+	// reset value
+	$value: 1;
+	// positive intergers get multiplied
+	@if $exponent >= 0 {
+		@for $i from 1 through $exponent {
+			$value: $value * $x;
+		}
+	}
+	// negitive intergers get divided. A number divided by itself is 1
+	@else {
+		@for $i from $exponent to 0 {
+			$value: $value / $x;
+		}
+	}
+	
+	// return the last value written
+	@return $value;
+}
+@function crp-Math-pow($b, $e) { @return crp-Math-power($b, $e); }
+
+@function crp-Math-factorial($x){
+	$ret: 1;
+	@if $x > 0 {
+		@while $x > 0 {
+			$ret: $ret * $x;
+			$x: $x - 1;
+		}
+	}
+	
+	@return $ret;
+}
+@function crp-Math-fact($x) { @return crp-Math-factorial($x); }
+
+@function crp-Math-exp($x) {
+	$ret: 0;
+
+	@for $n from 0 to $crp-Math-approximationLimit {
+		$ret: $ret + crp-Math-pow($x, $n) / crp-Math-fact($n);
+	}
+	
+	@return crp-Math-decimalRound($ret);
+}
+
+@function crp-Math-ln($x) {
+	$ln: 0;
+	$n: 1;
+	$dx: .001; // adding a simple 0 will make build time looks like x 1000
+	
+	@while $n <= $x {
+		$ln: $ln + $dx / $n;
+		$n: $n + $dx;
+	}
+	
+	@return $ln;
+}
+
+@function crp-Math-sqrt($x) {
+	@return crp-Math-exp(0.5 * crp-Math-ln($x));
+}
+
+@function crp-Math-decimalRound($x, $decimal: $crp-Math-approximationDecimalRound) {
+	$r: crp-Math-power(10, $decimal);
+	
+	@return round($x * $r) / $r;
+}
+
+// more to find here https://github.com/Team-Sass/Sassy-math/blob/master/sass/math.scss

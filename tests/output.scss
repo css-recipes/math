@@ -1,0 +1,39 @@
+@import "index";
+
+.crp-Math-test {
+	background: #0f0;
+	color: #fff;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+#crp-Math-test-pow {
+	@if crp-Math-pow(10, 2) != 100 { background: #f00; /* pow(10, 2) */ };
+	@if crp-Math-pow(10, 1) != 10 { background: #f00; /* pow(10, 1) */ };
+	//@if crp-Math-pow(10, .5) != 3.16227766017 { background: #f00; /* pow(10, .5) */ };
+	@if crp-Math-pow(10, 0) != 1 { background: #f00; /* pow(10, 0) */ };
+	//@if crp-Math-pow(10, -.5) != 0.31622776601 { background: #f00; /* pow(10, -.5) */ };
+	@if crp-Math-pow(10, -1) != 0.1 { background: #f00;/* pow(10, -1) */  }
+	@if crp-Math-pow(10, -2) != 0.01 { background: #f00;/* pow(10, -2) */  }
+}
+
+#crp-Math-test-fact {
+	@if crp-Math-fact(4) != 24 { background: #f00; /* fact(4) */ };
+	@if crp-Math-fact(0) != 1 { background: #f00; /* fact(0) */ };
+	@if crp-Math-fact(-1) != 1 { background: #f00; /* fact(-1) */ };
+}
+
+// test approximation using round() :)
+
+#crp-Math-test-exp {
+	@if crp-Math-exp(0) != 1 { background: #f00; /* exp(0) */; };
+	@if crp-Math-exp(1) != 2.71828 { background: #f00; /* exp(1) */ width: crp-Math-exp(1); };
+}
+
+#crp-Math-test-ln {
+	@if round(crp-Math-ln(crp-Math-exp(1))) != 1 { background: #f00; /* ln(exp(1)) */ };
+}
+
+#crp-Math-test-sqrt {
+	@if round(crp-Math-sqrt(4)) != 2 { background: #f00; /* sqrt(4) */ };
+}
