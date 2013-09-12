@@ -32,10 +32,10 @@ It brings you some math functions like pow, sqrt, cos, sin etc.
 + `crp-Math-pow($x, $exponent)`
 + `crp-Math-factorial($x)`
 + `crp-Math-exp($x)`
-+ `crp-Math-ln($x)`
++ `crp-Math-ln($x, $dx: auto)` auto set to 0.001 & adjust with big numbers to avoid slow computing
 + `crp-Math-sqrt($x)`
 
-_Note: Due to a Sass limitation, some functions (exp) return approximations according to the limit `$crp-Math-approximationLimit` (default to 25) to avoid infinite calculations. That said, it should be enough for playing with pixels._
+_Note: Due to a Sass limitation, some functions (exp) return approximations according to the limit `$crp-Math-approximationLimit` (default to 10) to avoid infinite calculations. That said, it should be enough for playing with pixels._
 
 ### Usage examples
 

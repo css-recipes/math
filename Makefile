@@ -4,7 +4,7 @@ COLOR_WARN=\x1b[33;01m
 COLOR_ERROR=\x1b[31;01m
 
 define ensure_no_output_by_default
-	if [ -z "`sass tests/no-output.scss`" ]; \
+	if [ -z "`sass --load-path bower_components tests/no-output.scss`" ]; \
 	then \
 		echo "$(COLOR_OK)✔$(COLOR_NO) '@import \"index\";' don't output anything."; \
 		exit 0; \
@@ -24,7 +24,7 @@ install:
 	@bower install
 
 css: tests/output.scss
-	@sass tests/output.scss index.css
+	@sass --load-path bower_components tests/output.scss index.css
 	@echo "$(COLOR_OK)✔$(COLOR_NO) Default CSS created"
 
 prefix:
