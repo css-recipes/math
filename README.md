@@ -1,6 +1,6 @@
 # Math [![Build Status](https://secure.travis-ci.org/css-recipes/math.png?branch=master)](http://travis-ci.org/css-recipes/math)
 
-> Math function for Sass using plain Sass
+> Some Math functions for Sass using plain Sass
 
 ## Getting Started
 
@@ -53,6 +53,7 @@ _This recipes requires Sass `~3.2.0` or libsass `~0.?`_
 
 ## Release History
 
+ * 2013-09-12   v0.1.1   Change sqrt() algorithm + faster ln().
  * 2013-09-10   v0.1.0   First release with everything needed for sqrt().
 
 ---

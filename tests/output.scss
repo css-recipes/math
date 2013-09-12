@@ -32,8 +32,17 @@
 
 #crp-Math-test-ln {
 	@if round(crp-Math-ln(crp-Math-exp(1))) != 1 { background: #f00; /* ln(exp(1)) */ };
+	@if round(crp-Math-ln(1)) != 0 { background: #f00; /* ln(1) */ };
+	@if round(crp-Math-ln(2)) != 1 { background: #f00; /* ln(2) */ };
+	@if round(crp-Math-ln(10)) != 2 { background: #f00; /* ln(10) */ };
+	@if round(crp-Math-ln(100)) != 5 { background: #f00; /* ln(100) */ };
+	@if round(crp-Math-ln(1000)) != 7 { background: #f00; /* ln(1000) */ };
 }
 
 #crp-Math-test-sqrt {
-	@if round(crp-Math-sqrt(4)) != 2 { background: #f00; /* sqrt(4) */ };
+	@if crp-Math-sqrt(1) != 1 { background: #f00; /* sqrt(1) */ };
+	@if crp-Math-sqrt(.6) != 0.7746 { background: #f00; /* sqrt(.6) */ };
+	@if crp-Math-sqrt(4) != 2 { background: #f00; /* sqrt(4) */ };
+	@if crp-Math-sqrt(-4) != 2 { background: #f00; /* sqrt(-4) */ };
+	@if crp-Math-sqrt(100) != 10 { background: #f00; /* sqrt(100) */ };
 }

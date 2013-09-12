@@ -16,7 +16,7 @@ $crp-Math-approximationDecimalRound: 5;
 			$value: $value / $x;
 		}
 	}
-	
+
 	// return the last value written
 	@return $value;
 }
@@ -30,7 +30,7 @@ $crp-Math-approximationDecimalRound: 5;
 			$x: $x - 1;
 		}
 	}
-	
+
 	@return $ret;
 }
 @function crp-Math-fact($x) { @return crp-Math-factorial($x); }
@@ -41,30 +41,42 @@ $crp-Math-approximationDecimalRound: 5;
 	@for $n from 0 to $crp-Math-approximationLimit {
 		$ret: $ret + crp-Math-pow($x, $n) / crp-Math-fact($n);
 	}
-	
+
 	@return crp-Math-decimalRound($ret);
 }
 
-@function crp-Math-ln($x) {
+@function crp-Math-ln($x, $dx: true) {
 	$ln: 0;
 	$n: 1;
-	$dx: .001; // adding a simple 0 will make build time looks like x 1000
-	
+	@if ($dx == true or $dx == auto) {
+		$dx: .0001;
+		// to avoid slow compilation
+		$c: 10;
+		@while $x/$c > 1 {
+			$c: $c * 10;
+		}
+		$dx: $dx * $c;
+	}
 	@while $n <= $x {
 		$ln: $ln + $dx / $n;
 		$n: $n + $dx;
 	}
-	
-	@return $ln;
+	@return crp-Math-decimalRound($ln);
 }
 
 @function crp-Math-sqrt($x) {
-	@return crp-Math-exp(0.5 * crp-Math-ln($x));
+	$x: abs($x);
+	$guess: 4;
+	$root: $guess;
+	@for $i from 1 through $crp-Math-approximationLimit {
+		$root: $root - (crp-Math-pow($root, 2) - $x) / (2 * $root);
+	}
+	@return crp-Math-decimalRound($root);
 }
 
 @function crp-Math-decimalRound($x, $decimal: $crp-Math-approximationDecimalRound) {
 	$r: crp-Math-power(10, $decimal);
-	
+
 	@return round($x * $r) / $r;
 }
 
